@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday Jim!</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100vh; height: 100%; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 10px; }
+  .wrapper { position: relative; width: 100%; max-width: 400px; height: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .envelope { position: relative; width: 100%; max-width: 340px; height: 200px; background: #e8d5b7; border-radius: 4px 4px 14px 14px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 10; overflow: hidden; flex-shrink: 0; }
+  .envelope::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 55%; background: #d4c4a8; clip-path: polygon(0 0, 50% 100%, 100% 0); transform-origin: top; transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 12; }
+  .envelope-front { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; background: #e8d5b7; clip-path: polygon(0 100%, 50% 0, 100% 100%); z-index: 11; }
+  .envelope-label { position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%); font-size: 15px; font-weight: 700; color: #8b7355; letter-spacing: 2px; text-transform: uppercase; z-index: 13; }
+  .wax-seal { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: #c0392b; border-radius: 50%; z-index: 14; box-shadow: 0 2px 8px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; transition: transform 0.3s; border: 3px solid #a93226; }
+  .wax-seal:hover { transform: translate(-50%, -50%) scale(1.12); }
+  .envelope.open { transform: translateY(-30px) scale(0.85); opacity: 0; pointer-events: none; }
+  .envelope.open::before { transform: rotateX(180deg); }
+  .card { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5); width: 92%; max-width: 380px; max-height: 88vh; background: #fff; border-radius: 16px; padding: 16px 14px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3); opacity: 0; z-index: 5; transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); overflow-y: scroll; -webkit-overflow-scrolling: touch; display: none; }
+  .card.show { display: block; transform: translate(-50%, -50%) scale(1); opacity: 1; z-index: 20; }
+  .card::-webkit-scrollbar { width: 0 !important; display: none; }
+  .card { -ms-overflow-style: none; scrollbar-width: none; }
+  .cat-svg { width: 140px; height: 140px; margin: 0 auto 6px; display: block; flex-shrink: 0; }
+  .cat-path { stroke: #2c2c2c; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1200; stroke-dashoffset: 1200; }
+  .cat-path.animate { animation: drawCat 2s ease-out forwards; }
+  .cat-fill { opacity: 0; }
+  .cat-fill.animate { animation: fadeInFill 0.5s ease-out 1.8s forwards; }
+  .hat-bounce { transform-origin: 100px 48px; }
+  .hat-bounce.animate { animation: hatBounce 1s ease-in-out infinite 2.5s; }
+  .mouth { transform-origin: 100px 114px; }
+  .mouth.animate { animation: sing 0.6s ease-in-out infinite 2.5s alternate; }
+  .tail-wag { transform-origin: 140px 132px; }
+  .tail-wag.animate { animation: tailWag 1.2s ease-in-out infinite 2.5s; }
+  .note { opacity: 0; }
+  .note.animate { animation: floatNote 2s ease-out infinite; }
+  .note1.animate { animation-delay: 2.6s; }
+  .note2.animate { animation-delay: 3.0s; }
+  .note3.animate { animation-delay: 3.4s; }
+  @keyframes drawCat { to { stroke-dashoffset: 0; } }
+  @keyframes fadeInFill { to { opacity: 1; } }
+  @keyframes hatBounce { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-8deg); } }
+  @keyframes sing { 0% { transform: scaleY(1); } 100% { transform: scaleY(1.5); } }
+  @keyframes tailWag { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(12deg); } 75% { transform: rotate(-8deg); } }
+  @keyframes floatNote { 0% { opacity: 0; transform: translate(0, 0) scale(0.4); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(25px, -45px) scale(1.1); } }
+  .confetti { position: absolute; pointer-events: none; animation: confettiFall linear infinite; z-index: 30; }
+  @keyframes confettiFall { 0% { transform: translateY(-20px) rotate(0deg); opacity: 1; } 100% { transform: translateY(500px) rotate(720deg); opacity: 0; } }
+  .title { font-size: 20px; font-weight: 800; color: #e74c3c; margin: 2px 0 2px; letter-spacing: -0.5px; opacity: 0; }
+  .title.animate { animation: fadeInUp 0.6s ease-out 2.2s forwards; }
+  .subtitle { font-size: 13px; font-weight: 600; color: #f39c12; margin-bottom: 4px; opacity: 0; }
+  .subtitle.animate { animation: fadeInUp 0.6s ease-out 2.5s forwards; }
+  .age-badge { display: inline-block; font-size: 32px; font-weight: 900; color: #e74c3c; line-height: 1; margin: 2px 0 6px; opacity: 0; }
+  .age-badge.animate { animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.8s forwards; }
+  .message-line { font-size: 13px; line-height: 1.6; color: #444; max-width: 340px; margin: 0 auto; padding: 0 2px; opacity: 0; }
+  .message-line.animate { animation: fadeInUp 0.5s ease-out forwards; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes popIn { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: scale(1); } }
+  .sparkle { position: absolute; width: 4px; height: 4px; border-radius: 50%; pointer-events: none; opacity: 0; z-index: 25; }
+  .sparkle.animate { animation: sparklePop 1.2s ease-out infinite; }
+  @keyframes sparklePop { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }
+  .replay-btn { margin-top: 10px; margin-bottom: 6px; padding: 8px 22px; border: 2px solid #e74c3c; background: transparent; color: #e74c3c; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; opacity: 0; flex-shrink: 0; }
+  .replay-btn.animate { animation: fadeInUp 0.5s ease-out 6.5s forwards; }
+  .replay-btn:hover { background: #e74c3c; color: #fff; }
+  .hint { position: absolute; bottom: -36px; left: 50%; transform: translateX(-50%); font-size: 12px; color: rgba(255,255,255,0.8); white-space: nowrap; text-align: center; }
+  @media (max-width: 380px) { .envelope { height: 170px; } .cat-svg { width: 120px; height: 120px; } .title { font-size: 17px; } .age-badge { font-size: 28px; } .message-line { font-size: 12px; } .card { padding: 14px 10px; } }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="envelope" id="envelope">
+    <div class="envelope-front"></div>
+    <div class="envelope-label">To: Jim</div>
+    <div class="wax-seal" id="waxSeal" onclick="openCard()">🎁</div>
+  </div>
+  <div class="card" id="card">
+    <div id="confettiBox" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:30;overflow:hidden;"></div>
+    <svg class="cat-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <g class="note note1" id="n1"><text x="155" y="72" font-size="20" fill="#e74c3c">♪</text></g>
+      <g class="note note2" id="n2"><text x="168" y="55" font-size="16" fill="#f39c12">♫</text></g>
+      <g class="note note3" id="n3"><text x="145" y="45" font-size="18" fill="#9b59b6">♩</text></g>
+      <g class="cat-fill" id="catFill">
+        <ellipse cx="100" cy="132" rx="38" ry="34" fill="#fdf6e3" stroke="none"/>
+        <ellipse cx="100" cy="86" rx="34" ry="30" fill="#fdf6e3" stroke="none"/>
+        <path d="M 74 65 Q 86 59 95 70 Q 89 78 78 76 Z" fill="#e67e22" stroke="none"/>
+        <path d="M 86 115 Q 104 109 118 119 Q 104 132 88 128 Z" fill="#e67e22" stroke="none"/>
+        <path d="M 114 62 Q 128 65 130 78 Q 118 82 110 73 Z" fill="#2c2c2c" stroke="none"/>
+        <path d="M 128 108 Q 138 115 134 128 Q 124 125 120 115 Z" fill="#2c2c2c" stroke="none"/>
+        <path d="M 68 54 L 64 40 L 80 52 Z" fill="#ffb6c1" stroke="none"/>
+        <path d="M 132 54 L 136 40 L 120 52 Z" fill="#ffb6c1" stroke="none"/>
+        <ellipse cx="100" cy="98" rx="4" ry="3" fill="#ff8fa3" stroke="none"/>
+      </g>
+      <g class="cat-path" id="catPath">
+        <ellipse cx="100" cy="86" rx="34" ry="30"/>
+        <path d="M 70 66 L 62 36 L 86 58"/>
+        <path d="M 130 66 L 138 36 L 114 58"/>
+        <path d="M 68 54 L 64 40 L 80 52"/>
+        <path d="M 132 54 L 136 40 L 120 52"/>
+        <ellipse cx="86" cy="84" rx="4.5" ry="6"/>
+        <circle cx="87" cy="82" r="1.3" fill="#2c2c2c"/>
+        <ellipse cx="114" cy="84" rx="4.5" ry="6"/>
+        <circle cx="113" cy="82" r="1.3" fill="#2c2c2c"/>
+        <path d="M 97 94 L 103 94 L 100 98 Z" fill="#ff8fa3"/>
+        <g class="mouth" id="mouth">
+          <path d="M 100 98 L 100 104 M 100 104 Q 91 110 87 104 M 100 104 Q 109 110 113 104"/>
+        </g>
+        <path d="M 64 92 L 45 88 M 64 96 L 43 99 M 64 100 L 47 107"/>
+        <path d="M 136 92 L 155 88 M 136 96 L 157 99 M 136 100 L 153 107"/>
+        <ellipse cx="100" cy="132" rx="38" ry="34"/>
+        <ellipse cx="84" cy="162" rx="9" ry="6"/>
+        <ellipse cx="116" cy="162" rx="9" ry="6"/>
+        <path d="M 80 162 L 80 166 M 84 162 L 84 167 M 88 162 L 88 166"/>
+        <path d="M 112 162 L 112 166 M 116 162 L 116 167 M 120 162 L 120 166"/>
+        <g class="tail-wag" id="tail">
+          <path d="M 138 132 Q 158 118 162 100 Q 166 86 158 78"/>
+          <path d="M 150 120 L 154 117 M 152 112 L 156 109 M 156 98 L 160 95"/>
+        </g>
+      </g>
+      <g class="hat-bounce" id="hat">
+        <path d="M 86 58 L 100 12 L 114 58" fill="#3498db" stroke="#2c2c2c" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M 90 45 L 110 45" stroke="#f1c40f" stroke-width="2"/>
+        <path d="M 92 32 L 108 32" stroke="#e74c3c" stroke-width="2"/>
+        <circle cx="100" cy="10" r="4.5" fill="#f1c40f" stroke="#2c2c2c" stroke-width="1.5"/>
+      </g>
+    </svg>
+    <div class="title" id="title">Happy Birthday</div>
+    <div class="subtitle" id="subtitle">Jim! 🎉</div>
+    <div class="age-badge" id="age">30</div>
+    <div class="message-line" id="m1">Happy 30th! 🎉 Don't feel too old 👴</div>
+    <div class="message-line" id="m2">Keep shining! ✨</div>
+    <div class="message-line" id="m3">At least you're entering your 30s with strong legs and a good memory 👀😂</div>
+    <div class="message-line" id="m4">I wish you the most important things in life:</div>
+    <div class="message-line" id="m5">good health, happiness, success, and lots of wealth 💰😂</div>
+    <div class="message-line" id="m6">生日快乐!!! 🎂🎊</div>
+    <button class="replay-btn" id="replayBtn" onclick="resetAll()">🎁 Open Again</button>
+  </div>
+  <div class="hint" id="hint">Click the wax seal to open 🎁</div>
+</div>
+<script>
+const AudioCtx=window.AudioContext||window.webkitAudioContext;let audioCtx;
+function initAudio(){if(!audioCtx)audioCtx=new AudioCtx()}
+function playTone(f,d,t,v){if(!audioCtx)return;let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=t||'sine';o.frequency.setValueAtTime(f,audioCtx.currentTime);g.gain.setValueAtTime(v||0.12,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+d);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+d)}
+function playMeow(){if(!audioCtx)return;let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sawtooth';o.frequency.setValueAtTime(600,audioCtx.currentTime);o.frequency.exponentialRampToValueAtTime(400,audioCtx.currentTime+0.15);o.frequency.exponentialRampToValueAtTime(550,audioCtx.currentTime+0.3);g.gain.setValueAtTime(0.08,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+0.4);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+0.4)}
+function playBirthdayTune(){if(!audioCtx)return;let n=[[264,0.4],[264,0.4],[297,0.8],[264,0.8],[352,0.8],[330,1.2],[264,0.4],[264,0.4],[297,0.8],[264,0.8],[396,0.8],[352,1.2],[264,0.4],[264,0.4],[528,0.8],[440,0.8],[352,0.8],[330,0.8],[297,1.2],[466,0.4],[466,0.4],[440,0.8],[352,0.8],[396,0.8],[352,1.2]],t=0.3;n.forEach(function(x){setTimeout(function(){playTone(x[0],x[1],'sine',0.1)},t*1000);t+=x[1]+0.05})}
+const colors=['#e74c3c','#f39c12','#2ecc71','#3498db','#9b59b6','#e67e22','#1abc9c','#ff6b9d'];
+function createConfetti(){let b=document.getElementById('confettiBox');b.innerHTML='';for(let i=0;i<50;i++){let e=document.createElement('div');e.className='confetti';e.style.left=Math.random()*100+'%';e.style.background=colors[Math.floor(Math.random()*colors.length)];e.style.width=(4+Math.random()*8)+'px';e.style.height=(4+Math.random()*8)+'px';e.style.borderRadius=Math.random()>0.4?'50%':'2px';e.style.animationDuration=(2.5+Math.random()*3)+'s';e.style.animationDelay=(Math.random()*5)+'s';b.appendChild(e)}}
+function createSparkles(){let c=document.getElementById('card'),o=c.querySelectorAll('.sparkle');for(let i=0;i<o.length;i++)o[i].remove();for(let i=0;i<8;i++){let s=document.createElement('div');s.className='sparkle';s.style.left=(8+Math.random()*84)+'%';s.style.top=(4+Math.random()*92)+'%';s.style.background=colors[Math.floor(Math.random()*colors.length)];s.style.animationDelay=(Math.random()*2)+'s';s.style.animationDuration=(1+Math.random()*2)+'s';c.appendChild(s)}}
+function openCard(){initAudio();playMeow();let e=document.getElementById('envelope'),c=document.getElementById('card'),h=document.getElementById('hint');e.classList.add('open');h.style.display='none';setTimeout(function(){c.classList.add('show');createConfetti();createSparkles();startAnimations();playBirthdayTune()},500)}
+function startAnimations(){document.getElementById('catPath').classList.add('animate');document.getElementById('catFill').classList.add('animate');document.getElementById('hat').classList.add('animate');document.getElementById('mouth').classList.add('animate');document.getElementById('tail').classList.add('animate');document.getElementById('n1').classList.add('animate');document.getElementById('n2').classList.add('animate');document.getElementById('n3').classList.add('animate');document.getElementById('title').classList.add('animate');document.getElementById('subtitle').classList.add('animate');document.getElementById('age').classList.add('animate');let d=[3.2,3.6,4.0,4.5,4.9,5.3];for(let i=1;i<=6;i++){let el=document.getElementById('m'+i);el.style.animationDelay=d[i-1]+'s';el.classList.add('animate')}document.getElementById('replayBtn').classList.add('animate');let sp=document.querySelectorAll('.sparkle');for(let i=0;i<sp.length;i++)sp[i].classList.add('animate')}
+function resetAll(){let e=document.getElementById('envelope'),c=document.getElementById('card'),h=document.getElementById('hint'),a=document.querySelectorAll('.animate');for(let i=0;i<a.length;i++)a[i].classList.remove('animate');c.classList.remove('show');e.classList.remove('open');h.style.display='block';document.getElementById('confettiBox').innerHTML='';let sp=document.querySelectorAll('.sparkle');for(let i=0;i<sp.length;i++)sp[i].remove();for(let i=1;i<=6;i++)document.getElementById('m'+i).style.animationDelay=''}
+</script>
+</body>
+</html>
