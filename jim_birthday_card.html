@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Happy Birthday Jim!</title>
+<title>Happy Birthday Tofi!</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Courier+Prime&display=swap');
   
@@ -38,7 +38,6 @@
     z-index: 10; overflow: hidden; flex-shrink: 0;
   }
 
-  /* Twine wrap */
   .twine {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 11;
   }
@@ -49,7 +48,6 @@
     box-shadow: 1px 0 2px rgba(0,0,0,0.3);
   }
 
-  /* Envelope flap */
   .envelope::before {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 52%;
     background: linear-gradient(180deg, #d4b896 0%, #c4a882 100%);
@@ -68,7 +66,6 @@
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
   }
 
-  /* Sender details - top left */
   .sender-details {
     position: absolute; top: 14px; left: 14px; z-index: 14;
     font-family: 'Courier Prime', monospace;
@@ -77,7 +74,6 @@
     opacity: 0.85;
   }
 
-  /* Cake stamp - top right */
   .stamp {
     position: absolute; top: 12px; right: 12px; z-index: 14;
     width: 52px; height: 64px;
@@ -105,7 +101,6 @@
     color: #999; opacity: 0.6;
   }
 
-  /* 3D Wax Seal with paws */
   .wax-seal {
     position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
     width: 56px; height: 56px; z-index: 16; cursor: pointer;
@@ -146,7 +141,6 @@
     font-family: 'Playfair Display', serif; font-style: italic;
   }
 
-  /* ===== CARD ===== */
   .card {
     position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%) scale(0.5);
@@ -175,7 +169,6 @@
   .card::-webkit-scrollbar { width: 0 !important; display: none; }
   .card { -ms-overflow-style: none; scrollbar-width: none; }
 
-  /* Vignette overlay */
   .card::after {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     pointer-events: none; border-radius: 4px;
@@ -183,7 +176,6 @@
     z-index: 1;
   }
 
-  /* ===== CAT SVG (Professional) ===== */
   .cat-svg {
     width: 180px; height: 180px; margin: 0 auto 10px;
     display: block; position: relative; z-index: 2;
@@ -215,7 +207,6 @@
   @keyframes tailWag { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(15deg); } 75% { transform: rotate(-10deg); } }
   @keyframes floatNote { 0% { opacity: 0; transform: translate(0, 0) scale(0.3); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(30px, -50px) scale(1.2); } }
 
-  /* ===== CONFETTI (Realistic) ===== */
   .confetti {
     position: absolute; pointer-events: none;
     animation: confettiFall linear infinite; z-index: 30;
@@ -225,11 +216,10 @@
     100% { transform: translateY(600px) rotate(900deg) scale(0.6); opacity: 0; }
   }
 
-  /* ===== TEXT (Premium) ===== */
   .title {
-    font-family: 'Cinzel', serif; font-size: 26px; font-weight: 900;
+    font-family: 'Cinzel', serif; font-size: 22px; font-weight: 900;
     color: #c0392b; margin: 4px 0 2px;
-    letter-spacing: 3px; text-transform: uppercase;
+    letter-spacing: 2px; text-transform: uppercase;
     opacity: 0; position: relative; z-index: 2;
   }
   .title.animate {
@@ -246,19 +236,6 @@
     opacity: 0; position: relative; z-index: 2;
   }
   .subtitle.animate { animation: fadeInUp 0.7s ease-out 2.7s forwards; }
-
-  .age-badge {
-    display: inline-block; font-family: 'Cinzel', serif;
-    font-size: 42px; font-weight: 900; color: #c0392b;
-    line-height: 1; margin: 4px 0 10px; opacity: 0;
-    position: relative; z-index: 2;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  .age-badge.animate { animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 3s forwards; }
-  .age-badge::after {
-    content: 'th'; font-size: 14px; font-weight: 700;
-    vertical-align: super; margin-left: 2px; color: #8b6914;
-  }
 
   .divider {
     width: 40px; height: 1px;
@@ -278,7 +255,6 @@
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes popIn { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: scale(1); } }
 
-  /* Sparkles */
   .sparkle {
     position: absolute; width: 5px; height: 5px; border-radius: 50%;
     pointer-events: none; opacity: 0; z-index: 25;
@@ -286,7 +262,6 @@
   .sparkle.animate { animation: sparklePop 1.5s ease-out infinite; }
   @keyframes sparklePop { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }
 
-  /* Replay button */
   .replay-btn {
     margin-top: 14px; margin-bottom: 8px; padding: 10px 28px;
     border: 2px solid #c0392b; background: transparent;
@@ -296,14 +271,13 @@
     cursor: pointer; transition: all 0.3s; opacity: 0;
     position: relative; z-index: 2;
   }
-  .replay-btn.animate { animation: fadeInUp 0.5s ease-out 7s forwards; }
+  .replay-btn.animate { animation: fadeInUp 0.5s ease-out 6.5s forwards; }
   .replay-btn:hover { background: #c0392b; color: #f5f0e8; }
 
   @media (max-width: 400px) {
     .envelope { height: 200px; }
     .cat-svg { width: 150px; height: 150px; }
-    .title { font-size: 22px; }
-    .age-badge { font-size: 36px; }
+    .title { font-size: 18px; }
     .message-line { font-size: 13px; }
     .card { padding: 18px 12px; }
     .stamp { width: 44px; height: 54px; }
@@ -403,17 +377,15 @@
       </g>
     </svg>
 
-    <div class="title" id="title">Happy Birthday</div>
-    <div class="subtitle" id="subtitle">Jim!</div>
-    <div class="age-badge" id="age">30</div>
+    <div class="title" id="title">Happy Birthday to Our Boss</div>
+    <div class="subtitle" id="subtitle">Tofi!</div>
     <div class="divider" id="div1"></div>
 
-    <div class="message-line" id="m1">Happy 30th! 🎉 Don't feel too old 👴</div>
-    <div class="message-line" id="m2">Keep shining! ✨</div>
-    <div class="message-line" id="m3">At least you're entering your 30s with strong legs and a good memory 👀😂</div>
-    <div class="message-line" id="m4">I wish you the most important things in life:</div>
-    <div class="message-line" id="m5">good health, happiness, success, and lots of wealth 💰😂</div>
-    <div class="message-line" id="m6">生日快乐!!! 🎂🎊</div>
+    <div class="message-line" id="m1">Wishing you more opportunities,</div>
+    <div class="message-line" id="m2">bigger wins, and lots of money</div>
+    <div class="message-line" id="m3">because someone has to pay for me</div>
+    <div class="message-line" id="m4">when I'm abroad 😝💕</div>
+    <div class="message-line" id="m5">Love ya 💕</div>
 
     <button class="replay-btn" id="replayBtn" onclick="resetAll()">🎁 Open Again</button>
   </div>
@@ -431,8 +403,9 @@ const colors=['#c0392b','#d4af37','#8b6914','#e67e22','#2c1810','#9b59b6','#1abc
 function createConfetti(){let b=document.getElementById('confettiBox');b.innerHTML='';for(let i=0;i<60;i++){let e=document.createElement('div');e.className='confetti';e.style.left=Math.random()*100+'%';e.style.background=colors[Math.floor(Math.random()*colors.length)];e.style.width=(4+Math.random()*10)+'px';e.style.height=(4+Math.random()*10)+'px';e.style.borderRadius=Math.random()>0.3?'50%':'2px';e.style.animationDuration=(2.5+Math.random()*3.5)+'s';e.style.animationDelay=(Math.random()*5)+'s';e.style.boxShadow='0 1px 3px rgba(0,0,0,0.2)';b.appendChild(e)}}
 function createSparkles(){let c=document.getElementById('card'),o=c.querySelectorAll('.sparkle');for(let i=0;i<o.length;i++)o[i].remove();for(let i=0;i<10;i++){let s=document.createElement('div');s.className='sparkle';s.style.left=(8+Math.random()*84)+'%';s.style.top=(4+Math.random()*92)+'%';s.style.background=colors[Math.floor(Math.random()*colors.length)];s.style.animationDelay=(Math.random()*2)+'s';s.style.animationDuration=(1+Math.random()*2)+'s';c.appendChild(s)}}
 function openCard(){initAudio();playMeow();let e=document.getElementById('envelope'),c=document.getElementById('card'),h=document.getElementById('hint');e.classList.add('open');h.style.display='none';setTimeout(function(){c.classList.add('show');createConfetti();createSparkles();startAnimations();playBirthdayTune()},600)}
-function startAnimations(){document.getElementById('catPath').classList.add('animate');document.getElementById('catFill').classList.add('animate');document.getElementById('hat').classList.add('animate');document.getElementById('mouth').classList.add('animate');document.getElementById('tail').classList.add('animate');document.getElementById('n1').classList.add('animate');document.getElementById('n2').classList.add('animate');document.getElementById('n3').classList.add('animate');document.getElementById('title').classList.add('animate');document.getElementById('subtitle').classList.add('animate');document.getElementById('age').classList.add('animate');document.getElementById('div1').classList.add('animate');let d=[3.5,3.9,4.3,4.8,5.2,5.6];for(let i=1;i<=6;i++){let el=document.getElementById('m'+i);el.style.animationDelay=d[i-1]+'s';el.classList.add('animate')}document.getElementById('replayBtn').classList.add('animate');let sp=document.querySelectorAll('.sparkle');for(let i=0;i<sp.length;i++)sp[i].classList.add('animate')}
-function resetAll(){let e=document.getElementById('envelope'),c=document.getElementById('card'),h=document.getElementById('hint'),a=document.querySelectorAll('.animate');for(let i=0;i<a.length;i++)a[i].classList.remove('animate');c.classList.remove('show');e.classList.remove('open');h.style.display='block';document.getElementById('confettiBox').innerHTML='';let sp=document.querySelectorAll('.sparkle');for(let i=0;i<sp.length;i++)sp[i].remove();for(let i=1;i<=6;i++)document.getElementById('m'+i).style.animationDelay=''}
+function startAnimations(){document.getElementById('catPath').classList.add('animate');document.getElementById('catFill').classList.add('animate');document.getElementById('hat').classList.add('animate');document.getElementById('mouth').classList.add('animate');document.getElementById('tail').classList.add('animate');document.getElementById('n1').classList.add('animate');document.getElementById('n2').classList.add('animate');document.getElementById('n3').classList.add('animate');document.getElementById('title').classList.add('animate');document.getElementById('subtitle').classList.add('animate');document.getElementById('div1').classList.add('animate');let d=[3.5,3.9,4.3,4.8,5.2];for(let i=1;i<=5;i++){let el=document.getElementById('m'+i);el.style.animationDelay=d[i-1]+'s';el.classList.add('animate')}document.getElementById('replayBtn').classList.add('animate');let sp=document.querySelectorAll('.sparkle');for(let i=0;i<sp.length;i++)sp[i].classList.add('animate')}
+function resetAll(){let e=document.getElementById('envelope'),c=document.getElementById('card'),h=document.getElementById('hint'),a=document.querySelectorAll('.animate');for(let i=0;i<a.length;i++)a[i].classList.remove('animate');c.classList.remove('show');e.classList.remove('open');h.style.display='block';document.getElementById('confettiBox').innerHTML='';let sp=document.querySelectorAll('.sparkle');for(let i=0;i<sp.length;i++)sp[i].remove();for(let i=1;i<=5;i++)document.getElementById('m'+i).style.animationDelay=''}
 </script>
 </body>
 </html>
+
